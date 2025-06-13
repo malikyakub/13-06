@@ -1,21 +1,17 @@
+import AnimatedTitle from "@/components/AnimatedTitle";
+import GradientDots from "@/components/GradientDots";
+
 export default function Home() {
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="flex flex-col items-center gap-2">
-        <h1 className="text-4xl font-bold">
-          Hello{" "}
-          <span className="text-teal-500 relative">
-            M
-            <span className="relative">
-              k
-              <span className="absolute -right-3 -top-2 text-sm transform rotate-12">
-                ◇
-              </span>
-            </span>
-          </span>
-        </h1>
-        <span className="text-sm text-gray-500">13 - 06</span>
+    <>
+      <GradientDots />
+      <div className="min-h-screen flex items-center justify-center relative z-10">
+        <div className="flex flex-col items-start gap-2">
+          <p className="text-gray-400">Hi all. I am</p>
+          <h1 className="text-6xl font-bold">Malik Yakub</h1>
+          <AnimatedTitle />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
