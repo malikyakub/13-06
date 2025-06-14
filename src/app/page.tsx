@@ -1,5 +1,5 @@
-import AnimatedTitle from "@/components/AnimatedTitle";
-import GradientDots from "@/components/GradientDots";
+import AnimatedTitle from "../../components/AnimatedTitle";
+import GradientDots from "../../components/GradientDots";
 
 export default function Home() {
   return (
