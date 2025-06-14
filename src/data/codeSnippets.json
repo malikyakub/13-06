@@ -1,0 +1,29 @@
+{
+  "snippets": [
+    {
+      "id": 1,
+      "title": "React Hook",
+      "code": "const useCounter = (initialValue = 0) => {\n  const [count, setCount] = useState(initialValue);\n\n  const increment = () => setCount(prev => prev + 1);\n  const decrement = () => setCount(prev => prev - 1);\n\n  return { count, increment, decrement };\n};"
+    },
+    {
+      "id": 2,
+      "title": "TypeScript Interface",
+      "code": "interface User {\n  id: string;\n  name: string;\n  email: string;\n  role: 'admin' | 'user';\n  createdAt: Date;\n}\n\nconst user: User = {\n  id: '1',\n  name: 'John Doe',\n  email: 'john@example.com',\n  role: 'user',\n  createdAt: new Date()\n};"
+    },
+    {
+      "id": 3,
+      "title": "Next.js Component",
+      "code": "const Card = ({ title, children }: CardProps) => {\n  return (\n    <div className=\"p-4 rounded-lg bg-white shadow-lg\">\n      <h2 className=\"text-xl font-bold mb-2\">{title}</h2>\n      <div className=\"text-gray-600\">{children}</div>\n    </div>\n  );\n};"
+    },
+    {
+      "id": 4,
+      "title": "API Handler",
+      "code": "export async function GET(request: Request) {\n  try {\n    const data = await fetchData();\n    return Response.json({ success: true, data });\n  } catch (error) {\n    return Response.json(\n      { success: false, error: 'Failed to fetch' },\n      { status: 500 }\n    );\n  }\n}"
+    },
+    {
+      "id": 5,
+      "title": "Utility Function",
+      "code": "const formatDate = (date: Date): string => {\n  return new Intl.DateTimeFormat('en-US', {\n    year: 'numeric',\n    month: 'long',\n    day: 'numeric',\n    hour: '2-digit',\n    minute: '2-digit'\n  }).format(date);\n};"
+    }
+  ]
+}
