@@ -2,28 +2,53 @@
   "snippets": [
     {
       "id": 1,
-      "title": "React Hook",
-      "code": "const useCounter = (initialValue = 0) => {\n  const [count, setCount] = useState(initialValue);\n\n  const increment = () => setCount(prev => prev + 1);\n  const decrement = () => setCount(prev => prev - 1);\n\n  return { count, increment, decrement };\n};"
+      "title": "malikyakub/alisom-online-market",
+      "code": "export default function App() {\n  // Create a new QueryClient instance\n  const queryClient = new QueryClient();\n  return (\n    // Provide the QueryClient to the app\n    <QueryClientProvider client={queryClient}>\n      <Outlet /> {/* Render nested routes */}\n    </QueryClientProvider>\n  );\n}"
     },
     {
       "id": 2,
-      "title": "TypeScript Interface",
-      "code": "interface User {\n  id: string;\n  name: string;\n  email: string;\n  role: 'admin' | 'user';\n  createdAt: Date;\n}\n\nconst user: User = {\n  id: '1',\n  name: 'John Doe',\n  email: 'john@example.com',\n  role: 'user',\n  createdAt: new Date()\n};"
+      "title": "malikyakub/Mk-passes",
+      "code": "<View style={styles.field}>\n  {/* Label for the input field */}\n  <Text style={styles.label}>Full name</Text>\n  {/* Text input to enter the full name */}\n  <TextInput\n    style={styles.textinput}\n    placeholder=\"Enter full name\"\n    value={fullName}\n    onChangeText={setFullName}\n  />\n</View>"
     },
     {
       "id": 3,
-      "title": "Next.js Component",
-      "code": "const Card = ({ title, children }: CardProps) => {\n  return (\n    <div className=\"p-4 rounded-lg bg-white shadow-lg\">\n      <h2 className=\"text-xl font-bold mb-2\">{title}</h2>\n      <div className=\"text-gray-600\">{children}</div>\n    </div>\n  );\n};"
+      "title": "Tabsamo/kudhan",
+      "code": "async function CreateHotel(newHotel: object): Promise<ReturnType> {\n  try {\n    // Insert a new hotel into the hotel_management table\n    const { data, error } = await supabase\n      .from(\"hotel_management\")\n      .insert([newHotel])\n      .select();\n\n    // Return error if insertion fails\n    if (error) return { data: null, err: error.message };\n\n    // Return inserted data\n    return { data, err: null };\n  } catch (error: unknown) {\n    // Handle any unexpected errors\n    return { data: null, err: String(error) };\n  }\n}"
     },
     {
       "id": 4,
-      "title": "API Handler",
-      "code": "export async function GET(request: Request) {\n  try {\n    const data = await fetchData();\n    return Response.json({ success: true, data });\n  } catch (error) {\n    return Response.json(\n      { success: false, error: 'Failed to fetch' },\n      { status: 500 }\n    );\n  }\n}"
+      "title": "Saakuut/macdaar",
+      "code": "const verifyOTP = async (phone: string, otp: string) => {\n  // Normalize the phone number format\n  const normalized = normalizePhone(phone);\n\n  // Attempt to verify the OTP via Supabase\n  const { data, error } = await supabase.auth.verifyOtp({\n    phone: normalized,\n    token: otp,\n    type: \"sms\",\n  });\n\n  // Return early if there was an error\n  if (error) return { user: null, error };\n\n  // Set the authenticated user\n  setUser(data.user);\n  return { user: data.user, error: null };\n};"
     },
     {
       "id": 5,
-      "title": "Utility Function",
-      "code": "const formatDate = (date: Date): string => {\n  return new Intl.DateTimeFormat('en-US', {\n    year: 'numeric',\n    month: 'long',\n    day: 'numeric',\n    hour: '2-digit',\n    minute: '2-digit'\n  }).format(date);\n};"
+      "title": "malikyakub/13-06",
+      "code": "<main className=\"flex-1 overflow-hidden relative\">\n  <div className=\"h-full flex flex-col justify-center items-center\">\n    {/* Render child components in the center of the screen */}\n    {children}\n  </div>\n</main>"
+    },
+    {
+      "id": 6,
+      "title": "malikyakub/Ai-powered-student-assist",
+      "code": "def send_message(self, event=None):\n  # Get the message typed by the user\n  user_message = self.user_message.get()\n  if not user_message.strip():\n    return\n  # Display the user message in the chat UI\n  self.create_user_message_label(user_message)\n  # Trigger AI to generate a response\n  self.ai_response(user_message)\n  # Clear the input box after sending\n  self.message_entry.delete(0, ctk.END)"
+    },
+    {
+      "id": 7,
+      "title": "malikyakub/HMS",
+      "code": "def main():\n  # Connect to the hotel database\n  conn = sqlite3.Connection('hotel.db')\n  cursor = conn.cursor()\n  # Set up required tables and data\n  table_creation(cursor)\n  depature_update(cursor)\n  rooms(cursor)\n  admin_table(cursor)\n  # Save changes to the database\n  conn.commit()"
+    },
+    {
+      "id": 8,
+      "title": "malikyakub/Bank project",
+      "code": "private void button1_Click(object sender, EventArgs e)\n{\n  // Retrieve input from username and password text boxes\n  string username = usernameBox.Text;\n  string pass = passBox.Text;\n\n  // Attempt to authenticate the user\n  if (AuthenticateUser(username, pass)) {\n    MessageBox.Show(\"success\");\n    this.Hide(); // Hide the login form on success\n  }\n  else {\n    MessageBox.Show(\"Invalid\"); // Show error on failure\n  }\n}"
+    },
+    {
+      "id": 9,
+      "title": "malikyakub/Mk-portfolio",
+      "code": "projectEl.innerHTML = `\n  ${imgHTML} <!-- Render project image -->\n  <ul class=\"used_langs\">${langHTML}</ul> <!-- List used languages -->\n  <h5>${project.title}</h5> <!-- Project title -->\n  <p>${project.description}</p> <!-- Project description -->\n  ${type === \"completed\" ? `<div class=\"action-btns\">${buttons}</div>` : \"\"} <!-- Buttons if completed -->\n`;"
+    },
+    {
+      "id": 10,
+      "title": "malikyakub/aligner-ai",
+      "code": "function DoTask() {\n  return (\n    <div className=\"flex flex-col items-center justify-center mt-10\">\n      {/* Header prompting the user */}\n      <h1 className=\"uppercase text-xl my-2 text-white\">you shoul Do.</h1>\n      {/* Emphasized task number */}\n      <span className=\"text-5xl font-bold\">#20</span>\n      {/* Final call to action */}\n      <h1 className=\"text-white font-thin uppercase\">now</h1>\n    </div>\n  );\n}"
     }
   ]
 }

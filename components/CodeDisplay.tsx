@@ -6,6 +6,7 @@ import "prismjs/components/prism-typescript";
 import "prismjs/components/prism-javascript";
 import "prismjs/components/prism-jsx";
 import "prismjs/components/prism-tsx";
+import "prismjs/components/prism-python";
 
 interface CodeDisplayProps {
   code: string;
@@ -23,32 +24,73 @@ const CodeDisplay: React.FC<CodeDisplayProps> = ({
   const [hasOverflow, setHasOverflow] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
 
+  const language = (() => {
+    if (
+      code.includes("React.FC") ||
+      code.includes("useState") ||
+      code.includes("tsx") ||
+      code.includes("jsx")
+    ) {
+      return "tsx";
+    }
+    if (
+      code.trimStart().startsWith("#") ||
+      code.includes("def ") ||
+      code.includes("import ")
+    ) {
+      return "python";
+    }
+    return "typescript";
+  })();
+
+  let projectComment: string | null = null;
+  let trimmedCode = code;
+
+  if (language === "python") {
+    const match = code.match(/^(\s*#.*)/);
+    if (match) {
+      projectComment = match[1];
+      trimmedCode = code.replace(projectComment, "").trimStart();
+    }
+  } else {
+    const match = code.match(/^(\s*\/\/.*|\/\*[\s\S]*?\*\/)/);
+    if (match) {
+      projectComment = match[1];
+      trimmedCode = code.replace(projectComment, "").trimStart();
+    }
+  }
+
+  const finalCode = projectComment
+    ? `${projectComment}\n${trimmedCode}`
+    : trimmedCode;
+
   useEffect(() => {
+    setIsLoading(true);
     try {
-      setIsLoading(true);
-      const language =
-        code.includes("React.FC") || code.includes("useState")
-          ? "tsx"
-          : "typescript";
       const highlighted = Prism.highlight(
-        code,
+        finalCode,
         Prism.languages[language],
         language
       );
       setHighlightedCode(highlighted);
     } catch (error) {
       console.error("Error highlighting code:", error);
-      setHighlightedCode(code);
+      setHighlightedCode(finalCode);
     } finally {
       setIsLoading(false);
     }
   }, [code]);
 
   useEffect(() => {
-    if (contentRef.current) {
-      const { scrollHeight, clientHeight } = contentRef.current;
-      setHasOverflow(scrollHeight > clientHeight);
-    }
+    const observer = new ResizeObserver(() => {
+      if (contentRef.current) {
+        const { scrollHeight, clientHeight } = contentRef.current;
+        setHasOverflow(scrollHeight > clientHeight);
+      }
+    });
+
+    if (contentRef.current) observer.observe(contentRef.current);
+    return () => observer.disconnect();
   }, [highlightedCode]);
 
   const handleCopy = async () => {
@@ -62,14 +104,15 @@ const CodeDisplay: React.FC<CodeDisplayProps> = ({
   };
 
   const content = (
-    <div className="relative group w-[560px] h-[182px] flex items-center justify-center">
+    <div className="relative group w-[560px] min-h-[182px] flex flex-col">
       <button
         onClick={handleCopy}
         className="absolute right-2 top-2 px-2 py-1 text-xs font-medium text-gray-400 hover:text-white bg-gray-800/50 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10"
       >
         {copied ? "Copied!" : "Copy"}
       </button>
-      <pre className="bg-gray-900/95 p-4 rounded-lg text-[0.85rem] leading-[1.6] font-mono text-white h-full w-full flex items-center justify-center overflow-hidden">
+
+      <pre className="bg-gray-900/95 p-4 rounded-lg text-[0.85rem] leading-[1.6] font-mono text-white flex-1 overflow-hidden relative">
         <code className="w-full">
           {isLoading ? (
             <div className="flex items-center justify-center py-4 w-full">
@@ -79,8 +122,8 @@ const CodeDisplay: React.FC<CodeDisplayProps> = ({
             <>
               <div
                 ref={contentRef}
-                className={`flex-1 w-full ${
-                  !isExpanded ? "line-clamp-[8]" : ""
+                className={`transition-all w-full overflow-hidden ${
+                  !isExpanded ? "max-h-[182px]" : "max-h-none"
                 }`}
                 dangerouslySetInnerHTML={{ __html: highlightedCode }}
               />
