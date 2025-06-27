@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import CodeDisplay from "./CodeDisplay";
-import codeSnippets from "../src/data/codeSnippets.json";
+import codeSnippets from "../data/codeSnippets.json";
 
 interface CodeSnippet {
   id: number;
@@ -13,7 +13,7 @@ export default function AnimatedCodeDisplay() {
   const [snippets, setSnippets] = useState<CodeSnippet[]>([]);
 
   useEffect(() => {
-    setSnippets(codeSnippets.snippets.slice(0, 5)); 
+    setSnippets(codeSnippets.snippets.slice(0, 5));
 
     const interval = setInterval(() => {
       setSnippets((prev) => {
@@ -31,7 +31,7 @@ export default function AnimatedCodeDisplay() {
     <div className="relative w-full flex flex-col items-center justify-center pt-20">
       <div className="relative w-[562px] h-[600px] flex items-center justify-center">
         {snippets.map((snippet, index) => {
-          const relativeIndex = index - 2; 
+          const relativeIndex = index - 2;
           const translateY = relativeIndex * 120;
           const translateX =
             relativeIndex === 0 ? 0 : relativeIndex < 0 ? -10 : 10;

@@ -20,31 +20,70 @@ const GradientDots = () => {
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
 
-    // Dot properties
+    // Dot properties - 7 dots with different colors, sizes, and opacities
     const dots = [
       {
-        x: canvas.width * 0.3,
-        y: canvas.height * 0.5,
-        radius: 100,
-        color: "#14b8a6",
-        speedX: 0.5,
-        speedY: 0.3,
+        x: canvas.width * 0.2,
+        y: canvas.height * 0.3,
+        radius: 80,
+        color: "#14b8a6", // teal
+        opacity: 0.4,
+        speedX: 1.2,
+        speedY: 0.8,
       },
       {
-        x: canvas.width * 0.5,
-        y: canvas.height * 0.4,
-        radius: 120,
-        color: "#a855f7",
-        speedX: -0.4,
-        speedY: 0.5,
+        x: canvas.width * 0.8,
+        y: canvas.height * 0.2,
+        radius: 150,
+        color: "#a855f7", // purple
+        opacity: 0.3,
+        speedX: -1.0,
+        speedY: 1.3,
       },
       {
         x: canvas.width * 0.7,
-        y: canvas.height * 0.6,
-        radius: 90,
-        color: "#f43f5e",
-        speedX: 0.3,
-        speedY: -0.4,
+        y: canvas.height * 0.7,
+        radius: 110,
+        color: "#f43f5e", // rose
+        opacity: 0.5,
+        speedX: 0.9,
+        speedY: -1.1,
+      },
+      {
+        x: canvas.width * 0.1,
+        y: canvas.height * 0.8,
+        radius: 95,
+        color: "#3b82f6", // blue
+        opacity: 0.35,
+        speedX: 1.5,
+        speedY: -0.7,
+      },
+      {
+        x: canvas.width * 0.9,
+        y: canvas.height * 0.5,
+        radius: 130,
+        color: "#f59e0b", // amber
+        opacity: 0.25,
+        speedX: -0.8,
+        speedY: 1.0,
+      },
+      {
+        x: canvas.width * 0.5,
+        y: canvas.height * 0.1,
+        radius: 70,
+        color: "#10b981", // emerald
+        opacity: 0.45,
+        speedX: 0.6,
+        speedY: 1.4,
+      },
+      {
+        x: canvas.width * 0.4,
+        y: canvas.height * 0.9,
+        radius: 160,
+        color: "#8b5cf6", // violet
+        opacity: 0.2,
+        speedX: -1.3,
+        speedY: -0.9,
       },
     ];
 
@@ -62,7 +101,7 @@ const GradientDots = () => {
         if (dot.x < 0 || dot.x > canvas.width) dot.speedX *= -1;
         if (dot.y < 0 || dot.y > canvas.height) dot.speedY *= -1;
 
-        // Draw gradient dot
+        // Draw gradient dot with individual opacity
         const gradient = ctx.createRadialGradient(
           dot.x,
           dot.y,
@@ -71,8 +110,9 @@ const GradientDots = () => {
           dot.y,
           dot.radius
         );
-        gradient.addColorStop(0, `${dot.color}80`); // 50% opacity
-        gradient.addColorStop(1, `${dot.color}00`); // 0% opacity
+        const opacityHex = Math.floor(dot.opacity * 255).toString(16).padStart(2, '0');
+        gradient.addColorStop(0, `${dot.color}${opacityHex}`); // center with dot's opacity
+        gradient.addColorStop(1, `${dot.color}00`); // transparent at edges
 
         ctx.beginPath();
         ctx.fillStyle = gradient;
