@@ -33,8 +33,8 @@ export default function AnimatedCodeDisplay() {
         {snippets.map((snippet, index) => {
           const relativeIndex = index - 2; 
           const translateY = relativeIndex * 120;
-          const translateX =
-            relativeIndex === 0 ? 0 : relativeIndex < 0 ? -10 : 10;
+          // const translateX =
+          //   relativeIndex === 0 ? 0 : relativeIndex < 0 ? -10 : 10;
           const scale = 1 - Math.abs(relativeIndex) * 0.1;
           const opacity = 1 - Math.abs(relativeIndex) * 0.3;
 
@@ -51,9 +51,6 @@ export default function AnimatedCodeDisplay() {
                 filter: relativeIndex === 0 ? "none" : "blur(1px)",
               }}
             >
-              <div className="text-sm text-gray-400 font-mono mb-1.5 w-full text-left">
-                {snippet.title}
-              </div>
 
               <CodeDisplay
                 code={snippet.code}

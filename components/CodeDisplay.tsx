@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState, useRef, useMemo, useLayoutEffect, memo } from "react";
 import Prism from "prismjs";
 import "prismjs/themes/prism-tomorrow.css";
 import "prismjs/components/prism-typescript";
@@ -13,18 +13,17 @@ interface CodeDisplayProps {
   showBorder?: boolean;
 }
 
-const CodeDisplay: React.FC<CodeDisplayProps> = ({
+const CodeDisplayComponent: React.FC<CodeDisplayProps> = ({
   code,
   showBorder = false,
 }) => {
   const [highlightedCode, setHighlightedCode] = useState<string>("");
   const [isLoading, setIsLoading] = useState(true);
-  const [copied, setCopied] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [hasOverflow, setHasOverflow] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
 
-  const language = (() => {
+  const language = useMemo(() => {
     if (
       code.includes("React.FC") ||
       code.includes("useState") ||
@@ -41,30 +40,30 @@ const CodeDisplay: React.FC<CodeDisplayProps> = ({
       return "python";
     }
     return "typescript";
-  })();
+  }, [code]);
 
-  let projectComment: string | null = null;
-  let trimmedCode = code;
+  const finalCode = useMemo(() => {
+    let projectComment: string | null = null;
+    let trimmed = code;
 
-  if (language === "python") {
-    const match = code.match(/^(\s*#.*)/);
-    if (match) {
-      projectComment = match[1];
-      trimmedCode = code.replace(projectComment, "").trimStart();
+    if (language === "python") {
+      const match = code.match(/^(\s*#.*)/);
+      if (match) {
+        projectComment = match[1];
+        trimmed = code.replace(projectComment, "").trimStart();
+      }
+    } else {
+      const match = code.match(/^(\s*\/\/.*|\/\*[\s\S]*?\*\/)/);
+      if (match) {
+        projectComment = match[1];
+        trimmed = code.replace(projectComment, "").trimStart();
+      }
     }
-  } else {
-    const match = code.match(/^(\s*\/\/.*|\/\*[\s\S]*?\*\/)/);
-    if (match) {
-      projectComment = match[1];
-      trimmedCode = code.replace(projectComment, "").trimStart();
-    }
-  }
 
-  const finalCode = projectComment
-    ? `${projectComment}\n${trimmedCode}`
-    : trimmedCode;
+    return projectComment ? `${projectComment}\n${trimmed}` : trimmed;
+  }, [code, language]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setIsLoading(true);
     try {
       const highlighted = Prism.highlight(
@@ -79,39 +78,23 @@ const CodeDisplay: React.FC<CodeDisplayProps> = ({
     } finally {
       setIsLoading(false);
     }
-  }, [code]);
+  }, [finalCode, language]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    const ref = contentRef.current;
+    if (!ref) return;
+
     const observer = new ResizeObserver(() => {
-      if (contentRef.current) {
-        const { scrollHeight, clientHeight } = contentRef.current;
-        setHasOverflow(scrollHeight > clientHeight);
-      }
+      const { scrollHeight, clientHeight } = ref;
+      setHasOverflow(scrollHeight > clientHeight);
     });
 
-    if (contentRef.current) observer.observe(contentRef.current);
+    observer.observe(ref);
     return () => observer.disconnect();
   }, [highlightedCode]);
 
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(code);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error("Failed to copy code:", err);
-    }
-  };
-
   const content = (
     <div className="relative group w-[560px] min-h-[182px] flex flex-col">
-      <button
-        onClick={handleCopy}
-        className="absolute right-2 top-2 px-2 py-1 text-xs font-medium text-gray-400 hover:text-white bg-gray-800/50 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10"
-      >
-        {copied ? "Copied!" : "Copy"}
-      </button>
-
       <pre className="bg-gray-900/95 p-4 rounded-lg text-[0.85rem] leading-[1.6] font-mono text-white flex-1 overflow-hidden relative">
         <code className="w-full">
           {isLoading ? (
@@ -145,7 +128,11 @@ const CodeDisplay: React.FC<CodeDisplayProps> = ({
   );
 
   return (
-    <div className="w-[562px] flex items-center justify-center">
+    <div
+      className={`w-[562px] flex items-center justify-center ${
+        !showBorder ? "pointer-events-none" : ""
+      }`}
+    >
       {showBorder ? (
         <div className="relative p-[1px] bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 w-full flex items-center justify-center">
           <div className="w-[560px] flex items-center justify-center">
@@ -159,4 +146,5 @@ const CodeDisplay: React.FC<CodeDisplayProps> = ({
   );
 };
 
+const CodeDisplay = memo(CodeDisplayComponent);
 export default CodeDisplay;

@@ -13,7 +13,7 @@ export default function Home() {
             <h1 className="text-5xl font-bold">Malik Yakub</h1>
             <AnimatedTitle />
             <p className="font-mono text-gray-500 mt-8">
-              // find my profile on Github:
+              {"// find my profile on Github:"}
             </p>
             <a
               href="https://github.com/malikyakub"
@@ -26,12 +26,12 @@ export default function Home() {
               <span className="text-gray-400">= </span>{" "}
               <span className="text-green-400">
                 <span className="hidden sm:inline">
-                  "https://github.com/malikyakub"
+                  &quot;https://github.com/malikyakub&quot;
                 </span>
                 <span className="sm:hidden">
-                  "https://github.com/
+                  &quot;https://github.com/
                   <br />
-                  malikyakub"
+                  malikyakub&quot;
                 </span>
               </span>
             </a>
