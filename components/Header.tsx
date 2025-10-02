@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import "remixicon/fonts/remixicon.css";
+import Link from "next/link";
+
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,27 +21,27 @@ const Header = () => {
           <nav className="hidden md:flex h-full items-center">
             <ul className="flex h-full gap-8">
               <li className="border-r border-gray-700 h-full flex items-center pr-8">
-                <a href="#" className="text-gray-300 hover:text-teal-500">
+                <Link href="/" className="text-gray-300 hover:text-teal-500">
                   _hello
-                </a>
+                </Link>
               </li>
               <li className="border-r border-gray-700 h-full flex items-center pr-8">
-                <a href="#" className="text-gray-300 hover:text-teal-500">
+                <Link href="/about-me" className="text-gray-300 hover:text-teal-500">
                   _about-me
-                </a>
+                </Link>
               </li>
               <li className="border-r border-gray-700 h-full flex items-center pr-8">
-                <a href="#" className="text-gray-300 hover:text-teal-500">
+                <Link href="/projects" className="text-gray-300 hover:text-teal-500">
                   _projects
-                </a>
+                </Link>
               </li>
             </ul>
           </nav>
         </div>
         <div className="hidden md:flex border-l border-gray-700 h-full items-center pl-8">
-          <a href="#" className="text-gray-300 hover:text-teal-500">
+          <Link href="/contact-me" className="text-gray-300 hover:text-teal-500">
             _contact-me
-          </a>
+          </Link>
         </div>
 
         <button
@@ -63,34 +64,34 @@ const Header = () => {
               # navigate:
             </div>
             <nav className="flex flex-col">
-              <a
-                href="#"
+              <Link
+                href="/"
                 className="px-4 py-5 text-gray-300 hover:text-teal-500 border-b border-gray-700"
                 onClick={toggleMenu}
               >
                 _hello
-              </a>
-              <a
-                href="#"
+              </Link>
+              <Link
+                href="/about-me"
                 className="px-4 py-5 text-gray-300 hover:text-teal-500 border-b border-gray-700"
                 onClick={toggleMenu}
               >
                 _about-me
-              </a>
-              <a
-                href="#"
+              </Link>
+              <Link
+                href="/projects"
                 className="px-4 py-5 text-gray-300 hover:text-teal-500 border-b border-gray-700"
                 onClick={toggleMenu}
               >
                 _projects
-              </a>
-              <a
-                href="#"
+              </Link>
+              <Link
+                href="/contact-me"
                 className="px-4 py-5 text-gray-300 hover:text-teal-500 border-b border-gray-700"
                 onClick={toggleMenu}
               >
                 _contact-me
-              </a>
+              </Link>
             </nav>
           </div>
         </div>

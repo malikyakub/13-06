@@ -1,0 +1,28 @@
+{
+  "contents": [
+    {
+      "name": "bio",
+      "content": "# Bio\nI am a passionate and driven software developer currently in my third year of Computer Science at Somali National University. My journey in tech began with a strong curiosity and a love for creating solutions, which led me to participate in hackathons—most recently winning 3rd place at *Help 2024*. Following that, I completed a front-end internship, gaining hands-on experience in building user-friendly web interfaces. Currently, I am deepening my skills through a full-stack course at Deero Institute, focusing on React, Node.js, and MySQL to build robust, scalable applications.\n\nI enjoy programming with JavaScript and its frameworks like React, Next.js, and React Native, and I also have experience with Python. I am comfortable working with various databases including SQLite, MySQL, SQL Server, and PostgreSQL, and I am proficient in version control using Git and GitHub. My projects often come from personal curiosity, as I like to solve problems that interest me and challenge me to think creatively.\n\nOutside of tech, I am an avid reader and enjoy listening to music, playing chess, and exploring new ideas through side projects. My professional philosophy centers on building clean, efficient, and maintainable code, while continuously learning and staying curious in the fast-paced world of technology.\n\n## Key Skills & Interests\n- *JavaScript* (React, Next.js, React Native) & *Python*\n- Databases: *MySQL*, *SQLite*, *PostgreSQL*, *SQL Server*\n- Version control: *Git* & *GitHub*\n- Problem-solving & innovative side projects\n- Reading, music, chess, and exploring new tech ideas \n\n## Get in Touch\n📧 [malik@example.com](mailto:malik@example.com) | 💼 [LinkedIn](www.linkedin.com/in/malik-yakub-90a752346) — I am always open to discussing new projects, collaborative opportunities, or innovative tech ideas."
+    },
+    {
+      "name": "interests",
+      "content": "## Interests\n\n- Web Development (front-end and full-stack)\n- Open Source contributions and community learning\n- Machine Learning and data-driven projects\n- Reading (especially sci-fi and tech articles)\n- Music and creative inspiration\n- Chess and strategy games"
+    },
+    {
+      "name": "education",
+      "content": "## Education\n\n### Somali National University – Bachelor of Computer Science (3rd Year)\n- Focused on software development, algorithms, and data structures\n- Participated in hackathons, winning 3rd place at *Help 2024*\n\n### Deero Institute – Full-Stack Web Development Course\n- Learning modern web technologies: *React*, *Node.js*, *MySQL*\n- Building hands-on projects to strengthen front-end and back-end skills"
+    },
+    {
+      "name": "school",
+      "content": "## School\n\n- Developed a strong foundation in programming and computational thinking\n- Participated in coding clubs and small team projects to solve real-world problems"
+    },
+    {
+      "name": "university",
+      "content": "## University\n\n- Gained in-depth knowledge in computer science fundamentals\n- Involved in hackathons and practical coding challenges\n- Currently exploring full-stack development with real-world applications"
+    },
+    {
+      "name": "Contact Me",
+      "content": "## Get in Touch\n\nYou can reach me via email at [malik@example.com](mailto:malik@example.com) or connect with me on [LinkedIn](www.linkedin.com/in/malik-yakub-90a752346). I am always open to discussing new projects, collaborative opportunities, or innovative tech ideas."
+    }
+  ]
+}

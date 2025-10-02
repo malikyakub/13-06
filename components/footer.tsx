@@ -1,15 +1,14 @@
 import React from "react";
-import "remixicon/fonts/remixicon.css";
 
 const Footer = () => {
   const links = [
     {
-      name: "github",
+      name: "GitHub",
       url: "https://github.com/malikyakub",
       icon: "ri-github-fill",
     },
     {
-      name: "linkedin",
+      name: "linkedIn",
       url: "https://www.linkedin.com/in/malik-yakub-90a752346",
       icon: "ri-linkedin-fill",
     },
