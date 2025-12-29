@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Footer from "../../components/footer";
 import Header from "../../components/Header";
-import { Analytics } from '@vercel/analytics/react';
+import { Analytics } from "@vercel/analytics/react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,9 +20,6 @@ export const metadata: Metadata = {
   description: "A personal space by malik yakub",
   icons: {
     icon: "/favicon.ico",
-  },
-  verification: {
-    google: "yZtX2si_03bf0MGn98GYcigS2ivvzqHY7HY_V6p1dlM",
   },
 };
 
